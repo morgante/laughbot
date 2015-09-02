@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 
+const styles = require('../styles/container.scss');
+
 export default class App extends Component {
   render() {
     return (
-      <h1>Hello, world.</h1>
+    	<div className={styles.container}>
+    		<h1>Hello, world... THIS IS AWESOME!</h1>
+    	</div>
     );
   }
 }
