@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+var styles = require("../../styles/main.scss");
 
 class App extends Component {
   constructor(props) {
@@ -21,13 +22,15 @@ class App extends Component {
     const value = pathname.substring(1);
 
     return (
-      <div>
-        <Link to="/">Home</Link>
-        { pathname }
-        <hr />
-        <hr />
-        {children}
-      </div>
+        <div>
+          <div className={styles.header}>
+            <Link to="/">Home</Link>
+            { pathname }
+          </div>
+          <hr />
+          <hr />
+          {children}
+        </div>
     );
   }
 }
