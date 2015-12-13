@@ -3,30 +3,48 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Button } from 'react-bootstrap';
 
-class HomePage extends Component {
-  constructor(props) {
-    super(props);
-  }
+import MessageBox from '../partials/MessageBox';
 
-  render() {
-    return (
-      <div>
-        <p>You are home!</p>
-        <Link to="/counter">Counter</Link>
-        <Button bsStyle="danger">Do not click me!</Button>
-      </div>
-    );
-  }
+class HomePage extends Component {
+	_connect() {
+		console.log('connect');
+
+		this.socket = io();
+	}
+
+	componentDidMount() {
+		this._connect();
+	}
+
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		const messageHandler = (text) => {
+			console.log('bot say', text);
+	
+			this.socket.emit('botsay', text);
+		}
+
+		return (
+			<div>
+				<p>You are home!</p>
+
+				<MessageBox onMessage={messageHandler} />
+			</div>
+		);
+	}
 }
 
 HomePage.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-  return {
-  };
+	return {
+	};
 }
 
 export default connect(
-  mapStateToProps
+	mapStateToProps
 )(HomePage);
