@@ -21,6 +21,10 @@ const userMiddleware = store => next => {
 					dispatch(actions.botSaid(message));
 				});
 
+				socket.on('bottyping', (message) => {
+					dispatch(actions.botTyping(message));
+				});
+
 				return next(action);
 		}
 

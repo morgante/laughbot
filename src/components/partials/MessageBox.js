@@ -16,7 +16,7 @@ export default class MessageBox extends Component {
 	}
 
 	render() {
-		const {onMessage} = this.props;
+		const {onMessage, onChange} = this.props;
 
 		const submitHandler = (evt) => {
 			evt.preventDefault();
@@ -30,6 +30,8 @@ export default class MessageBox extends Component {
 
 		const changeHandler = () => {
 			var value = this.refs.message.getDOMNode().value;
+
+			onChange(value);
 
 			this.setState({
 				message: value

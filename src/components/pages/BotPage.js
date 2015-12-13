@@ -21,6 +21,12 @@ class BotPage extends Component {
 	}
 
 	render() {
+		const typeHandler = (text) => {
+			console.log('bot types', text);
+			
+			this.socket.emit('bottypes', text);
+		}
+
 		const messageHandler = (text) => {
 			console.log('bot say', text);
 	
@@ -31,7 +37,7 @@ class BotPage extends Component {
 			<div>
 				<p>You are home!</p>
 
-				<MessageBox onMessage={messageHandler} />
+				<MessageBox onMessage={messageHandler} onChange={typeHandler} />
 			</div>
 		);
 	}

@@ -15,8 +15,6 @@ class HomePage extends Component {
 	render() {
 		const {bot: {bot}} = this.props;
 
-		console.log('bot', bot);
-
 		return (
 			<div>
 				{(() => {
@@ -24,6 +22,8 @@ class HomePage extends Component {
 						return (
 							<p>Bot is speaking... {bot.saying}</p>
 						);
+					} else if (bot.typing) {
+						return <p>Bot is thinking...</p>
 					}
 				})()}
 				<p>Welcome to the LaughBot</p>

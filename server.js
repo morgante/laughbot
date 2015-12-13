@@ -38,6 +38,10 @@ function startSocket() {
 	io.on('connection', function(socket){
 		console.log('a user connected');
 
+		socket.on('bottypes', function(message) {
+			io.emit('bottyping', message);
+		});
+
 		socket.on('botsay', function(message) {
 			console.log('bot saying', message);
 

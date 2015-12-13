@@ -23,3 +23,10 @@ export function botSaid(text) {
 		text: text
 	};
 }
+
+export function botTyping(text) {
+	return {
+		type: "BOT_TYPING",
+		text: text
+	};
+}

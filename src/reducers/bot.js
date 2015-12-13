@@ -12,6 +12,7 @@ export default function counter(state = initial_state, action) {
 				...state,
 				bot: {
 					...state.bot,
+					typing: false,
 					saying: action.text
 				}
 			};
@@ -21,6 +22,14 @@ export default function counter(state = initial_state, action) {
 				bot: {
 					...state.bot,
 					saying: (state.bot.saying === action.text) ? null : state.bot.saying
+				}
+			};
+		case "BOT_TYPING":
+			return {
+				...state,
+				bot: {
+					...state.bot,
+					typing: (action.text === "") ? false : true
 				}
 			};
 		default:
