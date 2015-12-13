@@ -7,6 +7,7 @@ const initial_state = {
 
 export default function counter(state = initial_state, action) {
 	switch (action.type) {
+		case "BOT_SAY":
 		case "BOT_START_SAYING":
 			return {
 				...state,

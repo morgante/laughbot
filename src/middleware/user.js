@@ -26,6 +26,23 @@ const userMiddleware = store => next => {
 				});
 
 				return next(action);
+			case "BOT_CONNECT":
+				socket = io();
+
+				return next(action);
+
+			case "BOT_TYPE":
+				socket.emit('bottypes', action.text);
+
+				return next(action);
+			case "BOT_SAY":
+				socket.emit('botsay', action.text);
+
+				socket.on('botsaid', (message) => {
+					dispatch(actions.botSaid(message));
+				});
+
+				return next(action);
 		}
 
 		next(action);

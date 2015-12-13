@@ -16,7 +16,7 @@ export default class MessageBox extends Component {
 	}
 
 	render() {
-		const {onMessage, onChange} = this.props;
+		const {onMessage, onChange, canSend} = this.props;
 
 		const submitHandler = (evt) => {
 			evt.preventDefault();
@@ -48,7 +48,7 @@ export default class MessageBox extends Component {
 					id="message"
 					onChange={changeHandler}
 					value={this.state.message} />
-				<input type="submit" className="btn btn-primary" name="submit" value="Send" />
+				<input type="submit" className="btn btn-primary" name="submit" value="Send" disabled={!canSend} />
 			</form>
 		);
 	}

@@ -4,9 +4,29 @@ export function userConnect() {
 	};
 }
 
+export function botConnect() {
+	return {
+		type: "BOT_CONNECT"
+	};
+}
+
 export function startThinking() {
 	return {
 		type: "BOT_START_THINKING"
+	};
+}
+
+export function botType(text) {
+	return {
+		type: "BOT_TYPE",
+		text: text
+	};
+}
+
+export function botSay(text) {
+	return {
+		type: "BOT_SAY",
+		text: text
 	};
 }
 

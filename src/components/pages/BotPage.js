@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Button } from 'react-bootstrap';
 
+import * as BotActions from '../../actions/bot';
+
 import MessageBox from '../partials/MessageBox';
 
 class BotPage extends Component {
 	_connect() {
 		console.log('connect');
 
-		this.socket = io();
+		this.props.botConnect();
 	}
 
 	componentDidMount() {
@@ -21,23 +23,23 @@ class BotPage extends Component {
 	}
 
 	render() {
+		const {bot: {bot}} = this.props;
+
 		const typeHandler = (text) => {
-			console.log('bot types', text);
-			
-			this.socket.emit('bottypes', text);
+			this.props.botType(text);
 		}
 
 		const messageHandler = (text) => {
-			console.log('bot say', text);
-	
-			this.socket.emit('botsay', text);
+			this.props.botSay(text);
 		}
+
+		console.log('bot', bot);
 
 		return (
 			<div>
 				<p>You are home!</p>
 
-				<MessageBox onMessage={messageHandler} onChange={typeHandler} />
+				<MessageBox onMessage={messageHandler} onChange={typeHandler} canSend={!bot.saying} />
 			</div>
 		);
 	}
@@ -48,9 +50,11 @@ BotPage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
 	return {
+		bot: state.bot
 	};
 }
 
 export default connect(
-	mapStateToProps
+	mapStateToProps,
+	BotActions
 )(BotPage);
