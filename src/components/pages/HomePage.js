@@ -3,35 +3,30 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Button } from 'react-bootstrap';
 
+import * as BotActions from '../../actions/bot';
+
 import MessageBox from '../partials/MessageBox';
 
 class HomePage extends Component {
-	_connect() {
-		console.log('connect');
-
-		this.socket = io();
-	}
-
 	componentDidMount() {
-		this._connect();
-	}
-
-	constructor(props) {
-		super(props);
+		this.props.userConnect();
 	}
 
 	render() {
-		const messageHandler = (text) => {
-			console.log('bot say', text);
-	
-			this.socket.emit('botsay', text);
-		}
+		const {bot: {bot}} = this.props;
+
+		console.log('bot', bot);
 
 		return (
 			<div>
-				<p>You are home!</p>
-
-				<MessageBox onMessage={messageHandler} />
+				{(() => {
+					if (bot.saying) {
+						return (
+							<p>Bot is speaking... {bot.saying}</p>
+						);
+					}
+				})()}
+				<p>Welcome to the LaughBot</p>
 			</div>
 		);
 	}
@@ -42,9 +37,11 @@ HomePage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
 	return {
+		bot: state.bot
 	};
 }
 
 export default connect(
-	mapStateToProps
+	mapStateToProps,
+	BotActions
 )(HomePage);

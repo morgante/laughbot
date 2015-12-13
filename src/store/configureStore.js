@@ -3,9 +3,12 @@ import thunkMiddleware from 'redux-thunk';
 import loggerMiddleware from 'redux-logger';
 import rootReducer from '../reducers';
 
+import userMiddleware from '../middleware/user';
+
 const createStoreWithMiddleware = applyMiddleware(
   thunkMiddleware,
-  loggerMiddleware
+  loggerMiddleware,
+  userMiddleware
 )(createStore);
 
 export default function configureStore(initialState) {

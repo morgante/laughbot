@@ -31,13 +31,20 @@ function startSocket() {
 		res.sendfile('index.html');
 	});
 
+	app.get('/bot', function(req, res){
+		res.sendfile('index.html');
+	});
+
 	io.on('connection', function(socket){
 		console.log('a user connected');
 
 		socket.on('botsay', function(message) {
 			console.log('bot saying', message);
 
+			io.emit('botsaying', message);
+
 			say.speak('Alex', message, function () {
+				io.emit('botsaid', message);
 				console.log('bot said', message);
 			});
 		});
